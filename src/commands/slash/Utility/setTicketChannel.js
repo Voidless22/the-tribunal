@@ -41,7 +41,7 @@ module.exports = {
 
         await channelId.send({ content: 'Create Petition:', components: [row] });
 
-        await db.dbQuery("UPDATE guilds SET ticket_channel_id =? WHERE guild_id =?", [channelId.id, interaction.guild.id]);
+        await db.dbQuery("UPDATE guilds SET ticket_channel_id =? WHERE guild_id =?", [channelId.id, interaction.guild.id], "Discord");
 
 
         await interaction.reply('Set the default channel for users to create petitions in to <#' + channelId.id + '>')

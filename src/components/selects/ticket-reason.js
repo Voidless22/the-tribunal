@@ -31,13 +31,12 @@ module.exports = {
         //Define all our Text Inputs
 
         // Base Req for all forms
-        const charNameInput = textInput('Character Name', 'character-name', TextInputStyle.Short, true, 15);
-        const ticketDescriptionInput = textInput('Ticket Description', 'ticket-description', TextInputStyle.Paragraph, true, 1024);
-        const accountUsernameInput = textInput('Account Name', 'account-username', TextInputStyle.Short, true, 20);
+        const charNameInput = textInput('Petition Submitter Character Name', 'character-name', TextInputStyle.Short, true, 15);
+        const accountUsernameInput = textInput('Petition Submitter Account Name', 'account-username', TextInputStyle.Short, true, 20);
 
         // Ip Exemption
-        const secondAccountUsernameInput = textInput('Second Account Name', 'second-account-username', TextInputStyle.Short, true, 20);
-        const secondCharacterNameInput = textInput('Second Character Name', 'second-character-name', TextInputStyle.Short, true, 15);
+        const additionalAccountNamesInput = textInput('Additional Account Names', 'additional-account-names', TextInputStyle.Short, true, 20);
+        const maxSimultaniousUsers = textInput('Maximum Players Active Simultaniously', 'max-simultanious-users', TextInputStyle.Short, true, 15);
 
         // Exploit Report
         const exploitTypeInput = textInput('Exploit Type', 'exploit-type', TextInputStyle.Short, true, 4000);
@@ -57,18 +56,17 @@ module.exports = {
 
         const firstActionRow = new ActionRowBuilder().addComponents(charNameInput);
         const secondActionRow = new ActionRowBuilder().addComponents(accountUsernameInput);
-        const lastActionRow = new ActionRowBuilder().addComponents(ticketDescriptionInput);
 
         if (value === 'IP Exemption') {
-            const thirdActionRow = new ActionRowBuilder().addComponents(secondCharacterNameInput);
-            const fourthActionRow = new ActionRowBuilder().addComponents(secondAccountUsernameInput);
-            modal.addComponents(firstActionRow, secondActionRow, thirdActionRow, fourthActionRow, lastActionRow);
+            const thirdActionRow = new ActionRowBuilder().addComponents(maxSimultaniousUsers);
+            const fourthActionRow = new ActionRowBuilder().addComponents(additionalAccountNamesInput);
+            modal.addComponents(firstActionRow, secondActionRow, thirdActionRow, fourthActionRow);
 
         }
         else {
 
             const thirdActionRow = new ActionRowBuilder().addComponents(othersInvolvedInput);
-            modal.addComponents(firstActionRow, secondActionRow, thirdActionRow, lastActionRow);
+            modal.addComponents(firstActionRow, secondActionRow, thirdActionRow);
 
         }
 

@@ -12,9 +12,9 @@ module.exports = {
     run: async (client, interaction) => {
         const characterName = interaction.fields.getTextInputValue('character-name');
         const accountUsername = interaction.fields.getTextInputValue('account-username');
-        const secondCharacterName = interaction.fields.getTextInputValue('second-character-name');
-        const secondAccountUsername = interaction.fields.getTextInputValue('second-account-username');
-        const petitionDescription = interaction.fields.getTextInputValue('ticket-description');
+        const additionalAccountNames = interaction.fields.getTextInputValue('additional-account-names');
+        const maxSimultaniousUsers = interaction.fields.getTextInputValue('max-simultanious-users');
+
 
         const staffRole = await utils.getStaffRoleId(interaction.guild.id);
         const petitionChannelId = await utils.getPetitionChannel(interaction.guild.id);
@@ -31,18 +31,18 @@ module.exports = {
         if (staffThread) {
             staffThread.send(
             `**Discord User Submitting Petition:** <@${interaction.user.id}>
-            \n**Character|Account 1:** ${characterName} | ${accountUsername}
-            \n**Character|Account 2:** ${secondCharacterName} | ${secondAccountUsername}
-            \n**Petition Description:** ${petitionDescription}`)
+            \n**Ticket Submitter Character|Account 1:** ${characterName} | ${accountUsername}
+            \n**Additional Account Usernames** ${additionalAccountNames} | ${additionalAccountNames}
+            \n**Max Simultanious Users** ${maxSimultaniousUsers}`)
             GMPetitionSection.send(`**New Petition Submitted:** Public: ${petitionThread} CSR: ${staffThread}`)
 
         }
 
         if (petitionThread) {
             petitionThread.send(`**Discord User Submitting Petition:** <@${interaction.user.id}>
-            \n**Character|Account 1:** ${characterName} | ${accountUsername}
-            \n**Character|Account 2:** ${secondCharacterName} | ${secondAccountUsername}
-            \n**Petition Description:** ${petitionDescription}`)
+            \n**Ticket Submitter Character|Account 1:** ${characterName} | ${accountUsername}
+            \n**Additional Account Usernames** ${additionalAccountNames} | ${additionalAccountNames}
+            \n**Max Simultanious Users** ${maxSimultaniousUsers}`)
             petitionThread.send(`<@&${staffRole}> will be with you soon.`)
 
         }

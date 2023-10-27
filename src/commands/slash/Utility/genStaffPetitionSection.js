@@ -66,8 +66,8 @@ module.exports = {
                 }
             }
 
-            await db.dbQuery("UPDATE guilds SET staff_petition_category =? WHERE guild_id =?", [(await petitionChannelCategory).id, interaction.guild.id]);
-            await db.dbQuery("UPDATE guilds SET staff_role_id = ? WHERE guild_id =?", [staffRole.id, interaction.guild.id]);
+            await db.dbQuery("UPDATE guilds SET staff_petition_category =? WHERE guild_id =?", [(await petitionChannelCategory).id, interaction.guild.id], "Discord");
+            await db.dbQuery("UPDATE guilds SET staff_role_id = ? WHERE guild_id =?", [staffRole.id, interaction.guild.id],"Discord");
         }
 
 

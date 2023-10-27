@@ -24,12 +24,6 @@ async function getPetitionChannel(guildId) {
     return results[0].ticket_channel_id;
 }
 
-async function queryCSRChats() {
-    const sql = 'SELECT * FROM qs_player_speech WHERE `from` in ("Shadowed", "Blood", "Horcrux", "Luin") OR `to` in ("Shadowed", "Blood", "Horcrux", "Luin") ORDER BY timerecorded desc';
-    const results = await db.dbQuery(sql,null,"PQ")
-    console.log(results)
-    return results
-}
 
 
 async function createThreads(threadName, staffSection, petitionChannel) {
@@ -63,5 +57,4 @@ module.exports = {
     getPetitionChannel:getPetitionChannel,
     createThreads:createThreads,
     getStaffRoleId:getStaffRoleId,
-    queryCSRChats:queryCSRChats
 }

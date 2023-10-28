@@ -1,7 +1,7 @@
 module.exports = {
     client: {
-        token: '[your bot token here]',
-        id: '[your bot id here]'
+        token: '',
+        id: ''
     },
     handler: {
         prefix: '?',
@@ -14,7 +14,7 @@ module.exports = {
         },
     },
     guild: {
-        id: '[your testing server id here]'
+        id: '1161406123081998459'
     },
     petitionCategories: [
         "IP Exemption",

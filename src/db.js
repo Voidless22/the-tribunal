@@ -6,7 +6,7 @@ const discordDbConfig = {
     port: process.env.DB_PORT,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
+    database: process.env.DISCORD_DB_NAME
 };
 const DiscordPool = mysql.createPool(discordDbConfig);
 

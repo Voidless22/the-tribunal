@@ -30,42 +30,40 @@ module.exports = {
         // Base Req for all forms
         const charNameInput = textInput('Petition Submitter Character Name', 'character-name', TextInputStyle.Short, true, 15);
         const accountUsernameInput = textInput('Petition Submitter Account Name', 'account-username', TextInputStyle.Short, true, 20);
-
+        
         // Ip Exemption
         const additionalAccountNamesInput = textInput('Additional Account Names', 'additional-account-names', TextInputStyle.Short, true, 20);
-        const maxSimultaniousUsers = textInput('Maximum Players Active Simultaniously', 'max-simultanious-users', TextInputStyle.Short, true, 15);
+        const maxSimultaneousUsers = textInput('Maximum Players Active Simultaniously', 'max-simultaneous-users', TextInputStyle.Short, true, 15);
 
-        // Exploit Report
-        const exploitTypeInput = textInput('Exploit Type', 'exploit-type', TextInputStyle.Short, true, 4000);
-        const exploitZoneInput = textInput('Exploit Zone', 'exploit-zone', TextInputStyle.Short, false, 4000);
+        //Camp Dispute
+        const partyMemberNames = textInput('Party Member Names', 'party-member-names', TextInputStyle.Short, true, 100);
+        const violatorNames = textInput('Violator Name(s)', 'violator-names', TextInputStyle.Short, true, 100);
+    
 
-        // Optional Req for most forms
-        const othersInvolvedInput = textInput('Others Involved', 'others-involved', TextInputStyle.Short, false, 30);
-        // Guild/Raid Disputes
-        const petitioningGuildInput = textInput('Petitioning Guild', 'petitioning-guild', TextInputStyle.Short, true, 30);
-        const guildsInvolvedInput = textInput('Other Guilds Involved', 'guilds-involved', TextInputStyle.Short, true, 30);
-        // Corpse Lost
-        const zoneInput = textInput('Zone', 'zone', TextInputStyle.Short, true, 60);
-        // Items Lost
-        const itemsLostInput = textInput('Items Lost', 'items-lost', TextInputStyle.Short, true, 30);
+        let actionRows = [];
 
-        const firstActionRow = new ActionRowBuilder().addComponents(charNameInput);
-        const secondActionRow = new ActionRowBuilder().addComponents(accountUsernameInput);
+        actionRows.push(new ActionRowBuilder().addComponents(charNameInput));
+        actionRows.push(new ActionRowBuilder().addComponents(accountUsernameInput));
 
-        if (value === 'IP Exemption') {
-            const thirdActionRow = new ActionRowBuilder().addComponents(maxSimultaniousUsers);
-            const fourthActionRow = new ActionRowBuilder().addComponents(additionalAccountNamesInput);
-            modal.addComponents(firstActionRow, secondActionRow, thirdActionRow, fourthActionRow);
+        switch (value) {
+            case 'IP Exemption':
+                actionRows.push(new ActionRowBuilder().addComponents(maxSimultaneousUsers));
+                actionRows.push(new ActionRowBuilder().addComponents(additionalAccountNamesInput));
+                break;
+            case 'Camp Dispute':
+                actionRows.push(new ActionRowBuilder().addComponents(partyMemberNames));
+                actionRows.push(new ActionRowBuilder().addComponents(violatorNames));
+            default:
+                break;
 
         }
-        else {
 
-            const thirdActionRow = new ActionRowBuilder().addComponents(othersInvolvedInput);
-            modal.addComponents(firstActionRow, secondActionRow, thirdActionRow);
+        for (const row of actionRows) {
+            modal.addComponents(row);
         }
 
         modal.setCustomId(`${petitionType}-modal`);
-        console.log(`${petitionType}-modal`);
+
         await interaction.showModal(modal);
 
         // Get the Modal Submit Interaction that is emitted once the User submits the Modal

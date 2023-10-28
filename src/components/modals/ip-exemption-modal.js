@@ -13,7 +13,7 @@ module.exports = {
         const characterName = interaction.fields.getTextInputValue('character-name');
         const accountUsername = interaction.fields.getTextInputValue('account-username');
         const additionalAccountNames = interaction.fields.getTextInputValue('additional-account-names');
-        const maxSimultaniousUsers = interaction.fields.getTextInputValue('max-simultanious-users');
+        const maxSimultaneousUsers = interaction.fields.getTextInputValue('max-simultaneous-users');
 
 
         const staffRole = await utils.getStaffRoleId(interaction.guild.id);
@@ -33,7 +33,7 @@ module.exports = {
             `**Discord User Submitting Petition:** <@${interaction.user.id}>
             \n**Ticket Submitter Character|Account 1:** ${characterName} | ${accountUsername}
             \n**Additional Account Usernames** ${additionalAccountNames} | ${additionalAccountNames}
-            \n**Max Simultanious Users** ${maxSimultaniousUsers}`)
+            \n**Max Simultanious Users** ${maxSimultaneousUsers}`)
             GMPetitionSection.send(`**New Petition Submitted:** Public: ${petitionThread} CSR: ${staffThread}`)
 
         }
@@ -42,7 +42,7 @@ module.exports = {
             petitionThread.send(`**Discord User Submitting Petition:** <@${interaction.user.id}>
             \n**Ticket Submitter Character|Account 1:** ${characterName} | ${accountUsername}
             \n**Additional Account Usernames** ${additionalAccountNames} | ${additionalAccountNames}
-            \n**Max Simultanious Users** ${maxSimultaniousUsers}`)
+            \n**Max Simultanious Users** ${maxSimultaneousUsers}`)
             petitionThread.send(`<@&${staffRole}> will be with you soon.`)
 
         }

@@ -23,8 +23,8 @@ DROP TABLE IF EXISTS `guilds`;
 CREATE TABLE `guilds` (
   `guild_id` varchar(100) NOT NULL,
   `owner_id` varchar(100) NOT NULL,
-  `ticket_channel_id` varchar(100) NOT NULL,
   `prefix` varchar(255) NOT NULL DEFAULT '!',
+  `ticket_channel_id` varchar(100) NULL,
   `staff_petition_category` varchar(200) DEFAULT NULL,
   `staff_role_id` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`guild_id`)

@@ -1,7 +1,5 @@
 const { StringSelectMenuInteraction, ChatInputCommandInteraction, SlashCommandBuilder, ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
-
 const ExtendedClient = require('../../class/ExtendedClient');
-
 
 function textInput(label, id, style, required, maxLength) {
     return new TextInputBuilder()
@@ -11,7 +9,6 @@ function textInput(label, id, style, required, maxLength) {
         .setRequired(required)
         .setMaxLength(maxLength)
 }
-
 
 module.exports = {
     customId: 'petition-reason',
@@ -42,7 +39,6 @@ module.exports = {
         const exploitTypeInput = textInput('Exploit Type', 'exploit-type', TextInputStyle.Short, true, 4000);
         const exploitZoneInput = textInput('Exploit Zone', 'exploit-zone', TextInputStyle.Short, false, 4000);
 
-
         // Optional Req for most forms
         const othersInvolvedInput = textInput('Others Involved', 'others-involved', TextInputStyle.Short, false, 30);
         // Guild/Raid Disputes
@@ -52,7 +48,6 @@ module.exports = {
         const zoneInput = textInput('Zone', 'zone', TextInputStyle.Short, true, 60);
         // Items Lost
         const itemsLostInput = textInput('Items Lost', 'items-lost', TextInputStyle.Short, true, 30);
-
 
         const firstActionRow = new ActionRowBuilder().addComponents(charNameInput);
         const secondActionRow = new ActionRowBuilder().addComponents(accountUsernameInput);
@@ -67,7 +62,6 @@ module.exports = {
 
             const thirdActionRow = new ActionRowBuilder().addComponents(othersInvolvedInput);
             modal.addComponents(firstActionRow, secondActionRow, thirdActionRow);
-
         }
 
         modal.setCustomId(`${petitionType}-modal`);
@@ -85,9 +79,5 @@ module.exports = {
             //   console.error(error)
             return null
         })
-
-
-
     }
 };
-

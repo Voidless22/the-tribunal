@@ -17,8 +17,6 @@ module.exports = {
             .setCustomId('petition-reason')
             .setPlaceholder('Petition Category')
             .addOptions(petitionCategories.map(category => { return {label: category, description: category, value: category} }));
-            
-
 
         const petitionReasonRow = new ActionRowBuilder().addComponents([petitionReasonSelect]);
 
@@ -26,7 +24,5 @@ module.exports = {
             content: `Petition Category:`, components: [petitionReasonRow],
             ephemeral: true
         })
-
-
     }
 };

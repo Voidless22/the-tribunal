@@ -3,19 +3,20 @@ const mysql = require('mysql2/promise');
 
 const discordDbConfig = {
     host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME
 };
-
 const DiscordPool = mysql.createPool(discordDbConfig);
+
 const pqDBConfig = {
     host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: 'pquarm'
+    database: process.env.PQ_DB_NAME
 };
-
 const pqPool = mysql.createPool(pqDBConfig);
 
 async function SQLQuery(sql, values, dbPool) {

@@ -39,9 +39,10 @@ module.exports = class extends Client {
         events(this);
         components(this);
 
-
         await this.login(process.env.CLIENT_TOKEN || config.client.token);
 
-        if (config.handler.deploy) deploy(this, config);
+        if (config.handler.deploy) {
+            deploy(this, config);
+        }
     };
 };

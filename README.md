@@ -1,4 +1,21 @@
 # **The Tribunal**
+# Getting Started with The Tribunal
+
+In this guide, we'll walk you through the process of setting up a Discord bot using The Tribunal library. We'll also cover the steps to create a Discord database and populate it with a schema using an SQL script. Lastly, we'll show you how to obtain a Discord bot token from the developer portal.
+
+## Prerequisites
+
+Before we begin, ensure you have the following prerequisites:
+
+- Node.js installed on your system.
+- A Discord account.
+- Access to the Discord Developer Portal (https://discord.com/developers/applications).
+
+## Step 1: Setting Up The Tribunal
+
+TBD
+
+
 ## **Commands**
 - /setTicketChannel *channel*
   - This stores the id of the user supplied channel in a database categorized by guild-id(server ID). Then it creates a button to create petitions with.

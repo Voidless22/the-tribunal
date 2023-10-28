@@ -11,10 +11,8 @@ module.exports = (client) => {
             const module = require('../events/' + dir + '/' + file);
 
             if (!module) continue;
-
             if (!module.event || !module.run) {
                 console.log('Unable to load the event ' + file + ' due to missing \'name\' or/and \'run\' properties.', 'warn');
-
                 continue;
             };
 

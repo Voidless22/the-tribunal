@@ -24,8 +24,6 @@ async function getPetitionChannel(guildId) {
     return results[0].ticket_channel_id;
 }
 
-
-
 async function createThreads(threadName, staffSection, petitionChannel) {
     // If it does exist, create a new thread with the formatting of **submitting character** - **other characters involved** in the staff only section under the petition type channel
     if (staffSection) {
@@ -36,7 +34,6 @@ async function createThreads(threadName, staffSection, petitionChannel) {
         });
         // Join the thread so we can see and send messages
         staffSection.threads.cache.find(thread => thread.name == threadName).join();
-
     }
 
     // do the same thing but with the "public" petition channel
@@ -48,7 +45,6 @@ async function createThreads(threadName, staffSection, petitionChannel) {
         });
         // Join the thread so we can see and send messages
         petitionChannel.threads.cache.find(thread => thread.name == threadName).join();
-
     }
 }
 

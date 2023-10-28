@@ -10,8 +10,6 @@ module.exports = {
      * @returns 
      */
     run: (_, client) => {
-
         console.log('Logged in as: ' + client.user.tag, 'done');
-
     }
 };

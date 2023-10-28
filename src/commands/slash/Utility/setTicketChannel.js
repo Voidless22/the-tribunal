@@ -3,11 +3,6 @@ const ExtendedClient = require('../../../class/ExtendedClient');
 const db = require('../../../db')
 const config = require('../../../config');
 
-
-
-
-
-
 module.exports = {
     structure: new SlashCommandBuilder()
         .setName('setticketchannel')
@@ -23,8 +18,6 @@ module.exports = {
      * @param {[]} args 
      */
     run: async (client, interaction, args) => {
-
-
         const channelId = client.channels.cache.get(interaction.options.getChannel('channel').id);
 
         if (!interaction.member.permissions.has([PermissionsBitField.Flags.ManageChannels, PermissionsBitField.Flags.ManageRoles])) {
@@ -40,12 +33,7 @@ module.exports = {
         const row = new ActionRowBuilder().addComponents(createPetitionButton);
 
         await channelId.send({ content: 'Create Petition:', components: [row] });
-
         await db.dbQuery("UPDATE guilds SET ticket_channel_id =? WHERE guild_id =?", [channelId.id, interaction.guild.id], "Discord");
-
-
         await interaction.reply('Set the default channel for users to create petitions in to <#' + channelId.id + '>')
     }
 }
-
-

@@ -48,6 +48,7 @@ module.exports = {
     
         //Lost Item
         const fullItemName = textInput('Full Item Name', 'full-item-name', TextInputStyle.Short, true, 250);
+        
         let actionRows = [];
 
         actionRows.push(new ActionRowBuilder().addComponents(charNameInput));
@@ -75,6 +76,9 @@ module.exports = {
                 actionRows.push(new ActionRowBuilder().addComponents(fullItemName));
                 break;
             case 'Inappropriate Language':
+                actionRows.push(new ActionRowBuilder().addComponents(violatorNames));
+                break;
+            case 'Kill Stealing':
                 actionRows.push(new ActionRowBuilder().addComponents(violatorNames));
                 break;
             default:

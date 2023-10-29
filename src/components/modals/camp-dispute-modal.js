@@ -13,7 +13,7 @@ module.exports = {
         const characterName = interaction.fields.getTextInputValue('character-name');
         const accountUsername = interaction.fields.getTextInputValue('account-username');
         const partyMemberNames = interaction.fields.getTextInputValue('party-member-names');
-        const violatorNames = interaction.fields.getTextInputValue('violator-names');
+        const violatorName = interaction.fields.getTextInputValue('violator-name');
         const staffRole = await utils.getStaffRoleId(interaction.guild.id);
         const petitionChannelId = await utils.getPetitionChannel(interaction.guild.id);
         const staffSectionId = await utils.getStaffPetitionCategory(interaction.guild.id);
@@ -32,7 +32,7 @@ module.exports = {
             {name: 'Petitioner Character:', value: `${characterName}`},
             {name: 'Petitioner Username:', value: `${accountUsername}`},
             {name: 'Party Members:', value: `${partyMemberNames}`},
-            {name: 'Violator Name(s):', value: `${violatorNames}`})
+            {name: 'Violator Name:', value: `${violatorName}`})
         .setTimestamp()
         // BIG TODO: TURN THESE INTO EMBEDS GOOD GOD THE NOTIFICATION SPAM
         if (staffThread) {

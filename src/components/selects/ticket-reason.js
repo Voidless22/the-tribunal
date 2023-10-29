@@ -37,7 +37,7 @@ module.exports = {
 
         //Camp Dispute
         const partyMemberNames = textInput('Party Member Names', 'party-member-names', TextInputStyle.Short, true, 250);
-        const violatorNames = textInput('Violator Name(s)', 'violator-names', TextInputStyle.Short, true, 100);
+        const violatorName = textInput('Violator Name', 'violator-name', TextInputStyle.Short, true, 100);
 
         //Guild Dispute
         const otherInvolvedGuild = textInput('Other Involved Guild', 'other-involved-guild', TextInputStyle.Short, true, 100);
@@ -49,6 +49,8 @@ module.exports = {
         //Lost Item
         const fullItemName = textInput('Full Item Name', 'full-item-name', TextInputStyle.Short, true, 250);
         
+        //Training
+        const trainerName = textInput('Trainer Name', 'trainer-name', TextInputStyle.Short, true, 100);
         let actionRows = [];
 
         actionRows.push(new ActionRowBuilder().addComponents(charNameInput));
@@ -61,7 +63,7 @@ module.exports = {
                 break;
             case 'Camp Dispute':
                 actionRows.push(new ActionRowBuilder().addComponents(partyMemberNames));
-                actionRows.push(new ActionRowBuilder().addComponents(violatorNames));
+                actionRows.push(new ActionRowBuilder().addComponents(violatorName));
                 break;
             case 'Guild Dispute':
                 actionRows.push(new ActionRowBuilder().addComponents(otherInvolvedGuild));
@@ -76,10 +78,13 @@ module.exports = {
                 actionRows.push(new ActionRowBuilder().addComponents(fullItemName));
                 break;
             case 'Inappropriate Language':
-                actionRows.push(new ActionRowBuilder().addComponents(violatorNames));
+                actionRows.push(new ActionRowBuilder().addComponents(violatorName));
                 break;
             case 'Kill Stealing':
-                actionRows.push(new ActionRowBuilder().addComponents(violatorNames));
+                actionRows.push(new ActionRowBuilder().addComponents(violatorName));
+                break;
+            case 'Training':
+                actionRows.push(new ActionRowBuilder().addComponents(trainerName));
                 break;
             default:
                 break;

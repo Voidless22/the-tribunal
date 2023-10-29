@@ -74,6 +74,9 @@ module.exports = {
             case 'Lost Item':
                 actionRows.push(new ActionRowBuilder().addComponents(fullItemName));
                 break;
+            case 'Inappropriate Language':
+                actionRows.push(new ActionRowBuilder().addComponents(violatorNames));
+                break;
             default:
                 break;
 

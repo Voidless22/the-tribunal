@@ -54,6 +54,9 @@ module.exports = {
 
         //Ninja Looting
         const ninjaLooterName = textInput('Ninja Looter', 'ninja-looter', TextInputStyle.Short, true, 100)
+
+        //Exploit
+        const exploitDescription = textInput('Exploit Description', 'exploit-description', TextInputStyle.Paragraph, true, 1500);
         let actionRows = [];
 
         actionRows.push(new ActionRowBuilder().addComponents(charNameInput));
@@ -92,6 +95,8 @@ module.exports = {
             case 'Ninja Looting':
                 actionRows.push(new ActionRowBuilder().addComponents(fullItemName));
                 actionRows.push(new ActionRowBuilder().addComponents(ninjaLooterName));
+            case 'Exploit':
+                actionRows.push(new ActionRowBuilder().addComponents(exploitDescription));
             default:
                 break;
 

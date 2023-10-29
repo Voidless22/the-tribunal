@@ -34,17 +34,13 @@ module.exports = {
             {name: 'Petitioner Username:', value: `${accountUsername}`})
         .setTimestamp()
 
-
         if (staffThread) {
             staffThread.send({embeds: [embed]})
             GMPetitionSection.send(`**New Petition Submitted:** Public: ${petitionThread} CSR: ${staffThread}`)
-
         }
         if (petitionThread) {
             petitionThread.send({embeds: [embed]})
-
             petitionThread.send(`<@${interaction.user.id}>, <@&${staffRole}> will be with you soon.`)
-
         }
         // this is really only here to satisfy the dumb discord api and confirm the interaction is done and not pending
         await interaction.reply({

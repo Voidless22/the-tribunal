@@ -46,7 +46,8 @@ module.exports = {
         const petitionerRaidLeader = textInput('Petitioner Raid Leader', 'petitioner-raid-leader', TextInputStyle.Short, true, 100);
         const otherInvolvedRaidLeader = textInput('Other Involved Raid Leader', 'other-raid-leader', TextInputStyle.Short, true, 100);
     
-
+        //Lost Item
+        const fullItemName = textInput('Full Item Name', 'full-item-name', TextInputStyle.Short, true, 250);
         let actionRows = [];
 
         actionRows.push(new ActionRowBuilder().addComponents(charNameInput));
@@ -69,6 +70,9 @@ module.exports = {
                 actionRows.push(new ActionRowBuilder().addComponents(otherInvolvedRaidLeader));
                 break;
             case 'Lost Corpse':
+                break;
+            case 'Lost Item':
+                actionRows.push(new ActionRowBuilder().addComponents(fullItemName));
                 break;
             default:
                 break;

@@ -47,12 +47,12 @@ module.exports = {
         if (petitionThread) {
             petitionThread.send({ embeds: [embed] })
 
-            petitionThread.send(`<@&${staffRole}> will be with you soon.`)
+            petitionThread.send(`<@${interaction.user.id}>, <@&${staffRole}> will be with you soon.`)
 
         }
         
         await interaction.reply({
-            content: `<@${interaction.user.id}>, Your Petition request has been submitted for ${characterName}.`,
+            content: `Your Petition request has been submitted for ${characterName}.`,
             ephemeral: true
         });
     }

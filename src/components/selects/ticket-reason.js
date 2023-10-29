@@ -68,6 +68,8 @@ module.exports = {
                 actionRows.push(new ActionRowBuilder().addComponents(petitionerRaidLeader));
                 actionRows.push(new ActionRowBuilder().addComponents(otherInvolvedRaidLeader));
                 break;
+            case 'Lost Corpse':
+                break;
             default:
                 break;
 

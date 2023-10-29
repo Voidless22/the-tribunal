@@ -37,6 +37,7 @@ module.exports = {
         if (staffThread) {
             staffThread.send({embeds: [embed]})
             GMPetitionSection.send(`**New Petition Submitted:** Public: ${petitionThread} CSR: ${staffThread}`)
+            db.dbQuery('SELECT FROM')
         }
         if (petitionThread) {
             petitionThread.send({embeds: [embed]})

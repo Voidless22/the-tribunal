@@ -23,7 +23,13 @@ async function getPetitionChannel(guildId) {
     const results = await db.dbQuery(sql, values,"Discord")
     return results[0].ticket_channel_id;
 }
-
+async function confirmCharAccount(charName, accountName){
+    const sql = "SELECT name, charname FROM account WHERE name=? AND charname =?";
+    const values = [accountName, charName]
+    const results = await db.dbQuery(sql, values, "PQ")
+    console.log(results)
+    return results
+}
 async function createThreads(threadName, staffSection, petitionChannel) {
     // If it does exist, create a new thread with the formatting of **submitting character** - **other characters involved** in the staff only section under the petition type channel
     if (staffSection) {
@@ -53,4 +59,5 @@ module.exports = {
     getPetitionChannel:getPetitionChannel,
     createThreads:createThreads,
     getStaffRoleId:getStaffRoleId,
+    confirmCharAccount:confirmCharAccount
 }

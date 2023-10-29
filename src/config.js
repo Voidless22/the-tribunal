@@ -1,7 +1,7 @@
 module.exports = {
     client: {
-        token: '',
-        id: ''
+        token: 'MTE2MTQwNzc0NzMwMTA2ODgwMA.GoYsk8.X1XRfmt50dXX2IcpJ6-X9b8h5M7QBQwFJ-lmyA',
+        id: '1161407747301068800'
     },
     handler: {
         prefix: '?',

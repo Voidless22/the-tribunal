@@ -1,7 +1,7 @@
 module.exports = {
     client: {
-        token: 'MTE2MTQwNzc0NzMwMTA2ODgwMA.GoYsk8.X1XRfmt50dXX2IcpJ6-X9b8h5M7QBQwFJ-lmyA',
-        id: '1161407747301068800'
+        token: '',
+        id: ''
     },
     handler: {
         prefix: '?',
@@ -14,7 +14,7 @@ module.exports = {
         },
     },
     guild: {
-        id: '1161406123081998459'
+        id: ''
     },
     petitionCategories: [
         "IP Exemption",

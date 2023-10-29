@@ -51,6 +51,9 @@ module.exports = {
         
         //Training
         const trainerName = textInput('Trainer Name', 'trainer-name', TextInputStyle.Short, true, 100);
+
+        //Ninja Looting
+        const ninjaLooterName = textInput('Ninja Looter', 'ninja-looter', TextInputStyle.Short, true, 100)
         let actionRows = [];
 
         actionRows.push(new ActionRowBuilder().addComponents(charNameInput));
@@ -86,6 +89,9 @@ module.exports = {
             case 'Training':
                 actionRows.push(new ActionRowBuilder().addComponents(trainerName));
                 break;
+            case 'Ninja Looting':
+                actionRows.push(new ActionRowBuilder().addComponents(fullItemName));
+                actionRows.push(new ActionRowBuilder().addComponents(ninjaLooterName));
             default:
                 break;
 

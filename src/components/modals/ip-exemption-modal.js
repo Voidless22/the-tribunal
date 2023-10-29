@@ -28,27 +28,31 @@ module.exports = {
         const staffThread = interaction.guild.channels.cache.find(thread => thread.name == `${characterName} - ${petitionType}` && thread.isThread() && thread.parent === GMPetitionSection);
         const petitionThread = interaction.guild.channels.cache.find(thread => thread.name == `${characterName} - ${petitionType}` && thread.isThread() && thread.parent === petitionChannel);
 
+        const embed = new EmbedBuilder()
+            .setTitle(`${petitionType.replace(/-/g, ' ')} petition`)
+            .addFields(
+                { name: 'Discord User Submitting Petition:', value: `<@${interaction.user.id}>` },
+                { name: 'Petitioner Character:', value: `${characterName}` },
+                { name: 'Petitioner Username:', value: `${accountUsername}` },
+                { name: 'Additional Account Names', value: `${additionalAccountNames}` },
+                {name: 'Max Simultaneous Users', value: `${maxSimultaneousUsers}`})
+            .setTimestamp()
+        
+        // BIG TODO: TURN THESE INTO EMBEDS GOOD GOD THE NOTIFICATION SPAM
         if (staffThread) {
-            staffThread.send(
-            `**Discord User Submitting Petition:** <@${interaction.user.id}>
-            \n**Ticket Submitter Character|Account 1:** ${characterName} | ${accountUsername}
-            \n**Additional Account Usernames** ${additionalAccountNames} | ${additionalAccountNames}
-            \n**Max Simultanious Users** ${maxSimultaneousUsers}`)
+            staffThread.send({ embeds: [embed] })
             GMPetitionSection.send(`**New Petition Submitted:** Public: ${petitionThread} CSR: ${staffThread}`)
 
         }
-
         if (petitionThread) {
-            petitionThread.send(`**Discord User Submitting Petition:** <@${interaction.user.id}>
-            \n**Ticket Submitter Character|Account 1:** ${characterName} | ${accountUsername}
-            \n**Additional Account Usernames** ${additionalAccountNames} | ${additionalAccountNames}
-            \n**Max Simultanious Users** ${maxSimultaneousUsers}`)
+            petitionThread.send({ embeds: [embed] })
+
             petitionThread.send(`<@&${staffRole}> will be with you soon.`)
 
         }
         
         await interaction.reply({
-            content: `Your Petition request has been submitted for ${characterName}.`,
+            content: `<@${interaction.user.id}>, Your Petition request has been submitted for ${characterName}.`,
             ephemeral: true
         });
     }

@@ -1,4 +1,4 @@
-const { StringSelectMenuInteraction, ChatInputCommandInteraction, SlashCommandBuilder, ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
+const { StringSelectMenuInteraction, ChatInputCommandInteraction, SlashCommandBuilder, ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle, ActionRow } = require('discord.js');
 const ExtendedClient = require('../../class/ExtendedClient');
 
 function textInput(label, id, style, required, maxLength) {
@@ -42,6 +42,9 @@ module.exports = {
         //Guild Dispute
         const otherInvolvedGuild = textInput('Other Involved Guild', 'other-involved-guild', TextInputStyle.Short, true, 100);
 
+        //Raid Dispute
+        const petitionerRaidLeader = textInput('Petitioner Raid Leader', 'petitioner-raid-leader', TextInputStyle.Short, true, 100);
+        const otherInvolvedRaidLeader = textInput('Other Involved Raid Leader', 'other-raid-leader', TextInputStyle.Short, true, 100);
     
 
         let actionRows = [];
@@ -57,8 +60,14 @@ module.exports = {
             case 'Camp Dispute':
                 actionRows.push(new ActionRowBuilder().addComponents(partyMemberNames));
                 actionRows.push(new ActionRowBuilder().addComponents(violatorNames));
+                break;
             case 'Guild Dispute':
                 actionRows.push(new ActionRowBuilder().addComponents(otherInvolvedGuild));
+                break;
+            case 'Raid Dispute':
+                actionRows.push(new ActionRowBuilder().addComponents(petitionerRaidLeader));
+                actionRows.push(new ActionRowBuilder().addComponents(otherInvolvedRaidLeader));
+                break;
             default:
                 break;
 

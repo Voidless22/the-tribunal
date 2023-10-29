@@ -48,7 +48,7 @@ module.exports = {
         }
         // this is really only here to satisfy the dumb discord api and confirm the interaction is done and not pending
         await interaction.reply({
-            content: `Your Petition request has been submitted for ${characterName}.`,
+            content: `<@${interaction.user.id}>, Your Petition request has been submitted for ${characterName}.`,
             ephemeral: true
         });
     }

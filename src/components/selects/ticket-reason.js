@@ -36,8 +36,12 @@ module.exports = {
         const maxSimultaneousUsers = textInput('Maximum Players Active Simultaniously', 'max-simultaneous-users', TextInputStyle.Short, true, 15);
 
         //Camp Dispute
-        const partyMemberNames = textInput('Party Member Names', 'party-member-names', TextInputStyle.Short, true, 100);
+        const partyMemberNames = textInput('Party Member Names', 'party-member-names', TextInputStyle.Short, true, 250);
         const violatorNames = textInput('Violator Name(s)', 'violator-names', TextInputStyle.Short, true, 100);
+
+        //Guild Dispute
+        const otherInvolvedGuild = textInput('Other Involved Guild', 'other-involved-guild', TextInputStyle.Short, true, 100);
+
     
 
         let actionRows = [];
@@ -53,6 +57,8 @@ module.exports = {
             case 'Camp Dispute':
                 actionRows.push(new ActionRowBuilder().addComponents(partyMemberNames));
                 actionRows.push(new ActionRowBuilder().addComponents(violatorNames));
+            case 'Guild Dispute':
+                actionRows.push(new ActionRowBuilder().addComponents(otherInvolvedGuild));
             default:
                 break;
 

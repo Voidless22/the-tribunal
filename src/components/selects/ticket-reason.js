@@ -30,14 +30,14 @@ module.exports = {
         // Base Req for all forms
         const charNameInput = textInput('Petition Submitter Character Name', 'character-name', TextInputStyle.Short, true, 15);
         const accountUsernameInput = textInput('Petition Submitter Account Name', 'account-username', TextInputStyle.Short, true, 20);
-        
+
         // Ip Exemption
         const additionalAccountNamesInput = textInput('Additional Account Names', 'additional-account-names', TextInputStyle.Short, true, 20);
         const maxSimultaneousUsers = textInput('Maximum Players Active Simultaniously', 'max-simultaneous-users', TextInputStyle.Short, true, 15);
 
         //Camp Dispute
         const partyMemberNames = textInput('Party Member Names', 'party-member-names', TextInputStyle.Short, true, 250);
-        const violatorName = textInput('Violator Name', 'violator-name', TextInputStyle.Short, true, 100);
+        const violatorName = textInput('Violator Name(s)', 'violator-name', TextInputStyle.Short, true, 300);
 
         //Guild Dispute
         const otherInvolvedGuild = textInput('Other Involved Guild', 'other-involved-guild', TextInputStyle.Short, true, 100);
@@ -45,10 +45,10 @@ module.exports = {
         //Raid Dispute
         const petitionerRaidLeader = textInput('Petitioner Raid Leader', 'petitioner-raid-leader', TextInputStyle.Short, true, 100);
         const otherInvolvedRaidLeader = textInput('Other Involved Raid Leader', 'other-raid-leader', TextInputStyle.Short, true, 100);
-    
+
         //Lost Item
         const fullItemName = textInput('Full Item Name', 'full-item-name', TextInputStyle.Short, true, 250);
-        
+
         //Training
         const trainerName = textInput('Trainer Name', 'trainer-name', TextInputStyle.Short, true, 100);
 
@@ -63,6 +63,13 @@ module.exports = {
         actionRows.push(new ActionRowBuilder().addComponents(accountUsernameInput));
 
         switch (value) {
+            case 'Suspected Automation':
+            case 'Suspected Hacking':
+            case 'Suspected Multiboxing':
+            case 'Inappropriate Language':
+            case 'Kill Stealing':
+                actionRows.push(new ActionRowBuilder().addComponents(violatorName));
+                break;
             case 'IP Exemption':
                 actionRows.push(new ActionRowBuilder().addComponents(maxSimultaneousUsers));
                 actionRows.push(new ActionRowBuilder().addComponents(additionalAccountNamesInput));
@@ -83,20 +90,17 @@ module.exports = {
             case 'Lost Item':
                 actionRows.push(new ActionRowBuilder().addComponents(fullItemName));
                 break;
-            case 'Inappropriate Language':
-                actionRows.push(new ActionRowBuilder().addComponents(violatorName));
-                break;
-            case 'Kill Stealing':
-                actionRows.push(new ActionRowBuilder().addComponents(violatorName));
-                break;
             case 'Training':
                 actionRows.push(new ActionRowBuilder().addComponents(trainerName));
                 break;
             case 'Ninja Looting':
                 actionRows.push(new ActionRowBuilder().addComponents(fullItemName));
                 actionRows.push(new ActionRowBuilder().addComponents(ninjaLooterName));
+                break;
             case 'Exploit':
                 actionRows.push(new ActionRowBuilder().addComponents(exploitDescription));
+                break;
+
             default:
                 break;
 

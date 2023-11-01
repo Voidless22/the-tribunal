@@ -26,7 +26,6 @@ module.exports = {
             .setTitle(`${value}`)
 
         //Define all our Text Inputs
-
         // Base Req for all forms
         const charNameInput = textInput('Petition Submitter Character Name', 'character-name', TextInputStyle.Short, true, 15);
         const accountUsernameInput = textInput('Petition Submitter Account Name', 'account-username', TextInputStyle.Short, true, 20);

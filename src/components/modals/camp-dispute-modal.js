@@ -5,6 +5,16 @@ const utils = require('../../utils');
 
 const petitionType = 'camp-dispute'
 
+async function checkMembers(members) {
+    for (let i = 0; i < members.length; i++){
+        let dbResults = await utils.confirmCharExists(members[i]);
+        if (!dbResults.length > 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
 module.exports = {
     customId: `${petitionType}-modal`,
 
@@ -20,14 +30,26 @@ module.exports = {
         const petitionChannel = interaction.guild.channels.cache.find(channel => channel.type === ChannelType.GuildText && channel.id == petitionChannelId);
         const GMPetitionSection = interaction.guild.channels.cache.find(channel => channel.type === ChannelType.GuildText && channel.name === petitionType && channel.parent == staffSectionId);
 
+        const partyMembers = partyMemberNames.split(/[^A-Za-z]/)
+        let allMembers = [];
+        allMembers.push(characterName)
+        for(let i=0; i < partyMembers.length; i++){ allMembers.push(partyMembers[i]) }
+        
+        for(let i=0; i < allMembers.length; i++) {
+            console.log(allMembers[i])
+        }
 
-        const accountCheck = await utils.confirmCharAccount(characterName, accountUsername);
+        const confirmPetitioner = await utils.confirmCharAccount(characterName, accountUsername);
+        console.log(confirmPetitioner.length)
+        
 
-        if (accountCheck.length > 0) {
+        if (checkMembers && confirmPetitioner.length > 0) {
+            const date = new Date();
+            
+            await utils.createPetitionThread(`${characterName} - ${petitionType}`,petitionChannel);
+            await utils.createPetitionThread(`${characterName}-${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`,GMPetitionSection);
 
-            await utils.createThreads(`${characterName} - ${petitionType}`, GMPetitionSection, petitionChannel);
-
-            const staffThread = interaction.guild.channels.cache.find(thread => thread.name == `${characterName} - ${petitionType}` && thread.isThread() && thread.parent === GMPetitionSection);
+            const staffThread = interaction.guild.channels.cache.find(thread => thread.name == `${characterName}-${date.getMonth()}/${date.getDate()}/${date.getFullYear()}` && thread.isThread() && thread.parent === GMPetitionSection);
             const petitionThread = interaction.guild.channels.cache.find(thread => thread.name == `${characterName} - ${petitionType}` && thread.isThread() && thread.parent === petitionChannel);
             const embed = new EmbedBuilder()
                 .setTitle(`${petitionType.replace(/-/g, ' ')} Petition`)
@@ -38,6 +60,8 @@ module.exports = {
                     { name: 'Party Members:', value: `${partyMemberNames}` },
                     { name: 'Violator Name:', value: `${violatorName}` })
                 .setTimestamp()
+
+     
             // BIG TODO: TURN THESE INTO EMBEDS GOOD GOD THE NOTIFICATION SPAM
             if (staffThread) {
                 staffThread.send({ embeds: [embed] })
@@ -46,7 +70,7 @@ module.exports = {
             }
             if (petitionThread) {
                 petitionThread.send({ embeds: [embed] })
-
+          
                 petitionThread.send(`<@${interaction.user.id}>,<@&${staffRole}> will be with you soon.`)
 
             }

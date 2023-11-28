@@ -26,9 +26,9 @@ module.exports = {
         
         charName = interaction.options.getString('character');
         accountName = interaction.options.getString('account');
-        results = await utils.confirmCharAccount(charName, accountName);
+        results = await utils.validateInput('Account', { accountName: accountName,charName: charName});
         if (results.length != 0) {
-        await interaction.reply(`${results[0].name}, ${results[0].charname}`);
+        await interaction.reply(`${results}`);
         }
         else {
             await interaction.reply("The supplied username and character combination could not be found.")

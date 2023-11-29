@@ -5,15 +5,6 @@ const utils = require('../../utils');
 
 const petitionType = 'camp-dispute'
 
-async function checkMembers(members) {
-    for (let i = 0; i < members.length; i++) {
-        let dbResults = await utils.validateInput('Character Exists', { charName: members[i] });
-        if (!dbResults) {
-            return false;
-        }
-    }
-    return true;
-}
 
 module.exports = {
     customId: `${petitionType}-modal`,
@@ -28,7 +19,7 @@ module.exports = {
         const partyMembers = utils.seperateValues(partyMemberNames)
         partyMembers.push(violatorName)
         const confirmPetitioner = await utils.validateInput('Account', { accountName: accountUsername, charName: characterName });
-        if (!await checkMembers(partyMembers) || !confirmPetitioner) {
+        if (!await utils.checkMembers(partyMembers) || !confirmPetitioner) {
             await interaction.reply({
                 content: `One or more of the supplied character names and/or account names supplied were not found.`,
                 ephemeral: true

@@ -15,6 +15,12 @@ module.exports = {
         const fullItemName = interaction.fields.getTextInputValue('full-item-name');
         const ninjaLooterName = interaction.fields.getTextInputValue('ninja-looter');
 
+        if (!await utils.validateInput("Account", { accountName: accountUsername, charName: characterName }) ||
+            !await utils.validateInput("Character Exists", { charName: ninjaLooterName }) || 
+            !await utils.validateInput("Item Exists", { itemName: fullItemName})) {
+            await interaction.reply({ content: `One or more required form inputs are invalid.`, ephemeral: true });
+        } else {
+
         const staffRole = await utils.getStaffRoleId(interaction.guild.id);
         const petitionChannelId = await utils.getPetitionChannel(interaction.guild.id);
         const staffSectionId = await utils.getStaffPetitionCategory(interaction.guild.id);
@@ -51,5 +57,7 @@ module.exports = {
             ephemeral: true
         });
     }
+}
+
 
 };

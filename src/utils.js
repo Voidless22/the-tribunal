@@ -84,16 +84,26 @@ async function queryChatLogs(charName) {
   }
 }
 
-async function verifyItemExists(item) {
-  const sql = "SELECT id FROM items WHERE Name in (?)";
-  const values = [item];
-  try {
-    const queryResults = await db.dbQuery(sql, values, "PQ");
-    return queryResults;
-  } catch (error) {
-    console.error(error);
-    throw error;
+
+
+async function checkMembers(members) {
+  for (let i = 0; i < members.length; i++) {
+    let dbResults = await utils.validateInput('Character Exists', { charName: members[i] });
+    if (!dbResults) {
+      return false;
+    }
   }
+  return true;
+}
+
+async function checkAccounts(accounts) {
+  for (let i = 0; i < accounts.length; i++) {
+    let dbResults = await utils.validateInput('Account Exists', { accountName: accounts[i] });
+    if (!dbResults) {
+      return false;
+    }
+  }
+  return true;
 }
 
 async function validateInput(inputType, input) {
@@ -114,10 +124,14 @@ async function validateInput(inputType, input) {
       query = "SELECT name,id FROM character_data WHERE name LIKE ?"
       queryValues = [input.charName];
       break;
+    case 'Account Exists':
+      query = "SELECT name FROM account WHERE name LIKE ?"
+      queryValues = [input.accountName]
     case 'Guild Exists':
       query = "SELECT name,id FROM guilds WHERE name LIKE ?";
       queryValues = [input.guildName];
       break;
+    
   }
   try {
     queryResults = await db.dbQuery(query, queryValues, "PQ");
@@ -158,10 +172,11 @@ module.exports = {
   getPetitionChannel: getPetitionChannel,
   createPetitionThread: createPetitionThread,
   getStaffRoleId: getStaffRoleId,
-  validateCharAccount: confirmUserInfo,
-  confirmCharExists: findCharacterId,
+  confirmUserInfo: confirmUserInfo,
+  findCharacterId: findCharacterId,
   seperateValues: seperateValues,
   queryChatLogs: queryChatLogs,
-  verifyItemExists: verifyItemExists,
-  validateInput:validateInput
+  validateInput: validateInput,
+  checkMembers: checkMembers,
+  checkAccounts: checkAccounts
 };

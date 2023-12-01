@@ -24,12 +24,13 @@ module.exports = {
             const petitionChannel = interaction.guild.channels.cache.find(channel => channel.type === ChannelType.GuildText && channel.id == petitionChannelId);
             const GMPetitionSection = interaction.guild.channels.cache.find(channel => channel.type === ChannelType.GuildText && channel.name === petitionType && channel.parent == staffSectionId);
 
-
-            await utils.createThreads(`${characterName} - ${petitionType}`, GMPetitionSection, petitionChannel);
-
-            const staffThread = interaction.guild.channels.cache.find(thread => thread.name == `${characterName} - ${petitionType}` && thread.isThread() && thread.parent === GMPetitionSection);
-            const petitionThread = interaction.guild.channels.cache.find(thread => thread.name == `${characterName} - ${petitionType}` && thread.isThread() && thread.parent === petitionChannel);
-
+            const date = new Date();
+            const threadName = `${characterName} - ${petitionType}`;
+            const staffThreadName = `${characterName}-${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`
+            await utils.createPetitionThread(threadName, petitionChannel);
+            await utils.createPetitionThread(staffThreadName, GMPetitionSection);
+            const staffThread = interaction.guild.channels.cache.find(thread => thread.name == staffThreadName && thread.isThread() && thread.parent === GMPetitionSection);
+            const petitionThread = interaction.guild.channels.cache.find(thread => thread.name == threadName && thread.isThread() && thread.parent === petitionChannel);
             const embed = new EmbedBuilder()
                 .setTitle(`${petitionType.replace(/-/g, ' ')} Petition`)
                 .addFields(

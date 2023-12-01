@@ -3,7 +3,7 @@ const ExtendedClient = require('../../class/ExtendedClient');
 const db = require('../../db')
 const utils = require('../../utils');
 
-const petitionType = 'lost-corpse'
+const petitionType = 'other'
 
 module.exports = {
     customId: `${petitionType}-modal`,
@@ -16,7 +16,6 @@ module.exports = {
         if (!await utils.validateInput("Account", { accountName: accountUsername, charName: characterName })) {
             await interaction.reply({ content: `One or more required form inputs are invalid.`, ephemeral: true });
         } else {
-
             const staffRole = await utils.getStaffRoleId(interaction.guild.id);
             const petitionChannelId = await utils.getPetitionChannel(interaction.guild.id);
             const staffSectionId = await utils.getStaffPetitionCategory(interaction.guild.id);
@@ -42,18 +41,21 @@ module.exports = {
             if (staffThread) {
                 staffThread.send({ embeds: [embed] })
                 GMPetitionSection.send(`**New Petition Submitted:** Public: ${petitionThread} CSR: ${staffThread}`)
+
             }
             if (petitionThread) {
                 petitionThread.send({ embeds: [embed] })
-                petitionThread.send(`<@${interaction.user.id}>, <@&${staffRole}> will be with you soon.`)
+                petitionThread.send(`<@${interaction.user.id}>,<@&${staffRole}> will be with you soon.`)
+
             }
-            // this is really only here to satisfy the dumb discord api and confirm the interaction is done and not pending
+
             await interaction.reply({
-                content: `,Your Petition request has been submitted for ${characterName}.`,
+                content: ` Your Petition request has been submitted for ${characterName}.`,
                 ephemeral: true
             });
+
+
         }
+
     }
-
-
 };
